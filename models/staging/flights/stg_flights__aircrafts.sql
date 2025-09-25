@@ -1,2 +1,3 @@
 select *
-from {{ source('demo_src', 'aircrafts') }}
+from 
+    {{ source('demo_src', 'aircrafts') }}
