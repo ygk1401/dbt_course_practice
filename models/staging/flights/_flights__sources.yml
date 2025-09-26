@@ -2,6 +2,10 @@ sources:
   - name: demo_src
     tables:
       - name: aircrafts
+        columns:
+          - name: aircraft_code
+          - name: model
+          - name: range
       - name: aircrafts_data
       - name: airports
       - name: airports_data
