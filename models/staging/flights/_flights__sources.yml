@@ -1,9 +1,14 @@
 sources:
   - name: demo_src
+    description: База по авиаперелетам
     tables:
       - name: aircrafts
         columns:
           - name: aircraft_code
+            description: '{{ doc("aircrafts_description") }}'
+            tests:
+              - not_null
+              - unique
           - name: model
           - name: range
       - name: aircrafts_data
@@ -11,6 +16,20 @@ sources:
       - name: airports_data
       - name: boarding_passes
       - name: bookings
+        columns:
+          - name: book_ref
+          - name: book_date
+          - name: total_amount
+        freshness: 
+            warn_after:
+              count: 6
+              period: hour
+            error_after:
+              count: 10000
+              period: day
+            filter: current_timestamp::date - book_date::date < 30000
+          # changed to config in v1.10
+        loaded_at_field: book_date::timestamp
       - name: flights
       - name: flights_v
       - name: routes
